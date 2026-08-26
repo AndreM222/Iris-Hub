@@ -1,5 +1,3 @@
-// components/prompts/project-prompt-behavior.tsx
-
 'use client';
 
 import { Activity, Clock3, DollarSign, Gauge, Hash, TriangleAlert } from 'lucide-react';

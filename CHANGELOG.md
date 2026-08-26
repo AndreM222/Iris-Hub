@@ -62,6 +62,7 @@
 - *(action step)* Add for the action step images we can switch to and preview
 - *(feedback)* Add feedback dialog
 - *(prompts)* Update prompts page
+- *(favicon)* Update favicon
 
 ### 🐛 Bug Fixes
 
@@ -89,6 +90,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
+- *(changelog)* Update CHANGELOG.md [skip ci]
 - *(changelog)* Update CHANGELOG.md [skip ci]
 - *(changelog)* Update CHANGELOG.md [skip ci]
 - *(changelog)* Update CHANGELOG.md [skip ci]

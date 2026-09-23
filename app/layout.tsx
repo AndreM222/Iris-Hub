@@ -46,7 +46,7 @@ export default function RootLayout({
           >
             <SidebarProvider className="flex-1 min-h-0">
               <AppSidebar />
-              <SidebarInset className="flex flex-col min-h-0">
+              <SidebarInset className="flex flex-col min-h-0 h-screen">
                 <header className="z-50 sticky top-0 flex h-16 shrink-0 items-center gap-2 border-b px-4 justify-between backdrop-blur-md">
                   <div className="flex items-center gap-2 px-4">
                     <SidebarTrigger className="-ml-2" />
@@ -58,9 +58,9 @@ export default function RootLayout({
                   </div>
                 </header>
                 <div className="flex-1 min-h-0 overflow-y-auto p-6">
-                  <div className="mx-auto flex w-full flex-col gap-6">
+                  <div className="mx-auto flex h-full w-full flex-col gap-6">
                     <PageHeader />
-                    {children}
+                    <div className="flex-1 min-h-0">{children}</div>
                     <Toaster />
                   </div>
                 </div>

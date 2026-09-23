@@ -1,5 +1,16 @@
 'use client';
 
+import { useMemo } from 'react';
+
+import { getProjects } from '@/lib/mockApi';
+import {
+  Command,
+  CommandEmpty,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from '@/components/ui/command';
+
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -19,6 +30,7 @@ import { Project, ProjectIcon } from '@/components/cards/project-cards';
 import { ChevronsUpDown, Plus } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { IconName } from '@/components/dialogs/project-icon';
+import { usePathname, useRouter } from 'next/navigation';
 
 type BannerSize = keyof typeof sizeConfig;
 
@@ -140,5 +152,56 @@ export function ProjectSwitcher({
         </DropdownMenu>
       </SidebarMenuItem>
     </SidebarMenu>
+  );
+}
+
+export function DecisionScreen() {
+  const projects = useMemo(() => getProjects(), []);
+  const path = usePathname();
+  const router = useRouter();
+
+  return (
+    <main className="relative flex h-full min-h-0 w-full items-center justify-center overflow-hidden bg-background p-6 rounded-xl border">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_20%_10%,rgba(124,58,237,0.12),transparent_32%),radial-gradient(circle_at_85%_80%,rgba(14,165,233,0.10),transparent_30%)]"
+      />
+
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0 opacity-40 bg-[linear-gradient(to_right,rgba(148,163,184,0.08)_1px,transparent_1px),linear-gradient(to_bottom,rgba(148,163,184,0.08)_1px,transparent_1px)] bg-size-[48px_48px] mask-[radial-gradient(ellipse_at_center,black_35%,transparent_80%)]"
+      />
+
+      <div className="relative z-10 w-full max-w-sm">
+        <div className="mb-4 text-center">
+          <p className="text-sm font-medium text-primary">Select a project to continue.</p>
+        </div>
+
+        <Command className="w-full rounded-xl border bg-background/85 shadow-2xl shadow-primary/5 backdrop-blur-xl">
+          <CommandInput placeholder="Find project..." />
+
+          <CommandList className="max-h-[20vh] overflow-y-auto">
+            <CommandEmpty>No results found.</CommandEmpty>
+
+            {projects.map((project) => (
+              <CommandItem
+                key={project.id}
+                value={project.name}
+                onSelect={() => {
+                  router.push(`${path}/${project.id}`);
+                }}
+              >
+                <ProjectBanner
+                  description={project.description}
+                  color={project.color}
+                  icon={project.icon}
+                  name={project.name}
+                />
+              </CommandItem>
+            ))}
+          </CommandList>
+        </Command>
+      </div>
+    </main>
   );
 }

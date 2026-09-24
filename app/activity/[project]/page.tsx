@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { getProjects, getActivityForProject, getLogs } from '@/lib/mockApi';
 import { FaFileExport } from 'react-icons/fa6';
 import { useParams, usePathname, useRouter } from 'next/navigation';
+import { PageHeader } from '@/components/app-navigation';
 
 function ActivityContent() {
   const router = useRouter();
@@ -41,6 +42,12 @@ function ActivityContent() {
 
   return (
     <div className="h-full w-full space-y-6 overflow-hidden">
+      <PageHeader
+        setIcon="SquareActivity"
+        setTitle="Activity"
+        setDescription="Monitor connection activity."
+      />
+
       <div className="flex items-center justify-between gap-4">
         <ProjectSwitcher
           projects={projects}

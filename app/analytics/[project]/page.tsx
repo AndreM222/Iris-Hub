@@ -12,6 +12,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { getProjects, getTags } from '@/lib/mockApi';
 import { useRouter, usePathname, useParams } from 'next/navigation';
 import { FaFileExport } from 'react-icons/fa6';
+import { PageHeader } from '@/components/app-navigation';
 
 type MetricProps = {
   label: string;
@@ -78,6 +79,12 @@ function AnalyticsPageContent() {
 
   return (
     <div className="space-y-6">
+      <PageHeader
+        setIcon="ChartArea"
+        setTitle="Analytics"
+        setDescription="Monitor detection quality and the model performance overall."
+      />
+
       <div className="flex items-center justify-between gap-4">
         <ProjectSwitcher
           projects={projects}

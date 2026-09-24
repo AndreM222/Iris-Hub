@@ -59,7 +59,6 @@ export function GlobalDataLayoutContent({ children }: { children: React.ReactNod
         setTitle="Global Data"
         setDescription="Monitor worlwide activity per country."
         setSubItem={navTabs}
-        useIndex={true}
       />
 
       <ProjectSwitcher

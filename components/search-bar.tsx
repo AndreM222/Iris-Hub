@@ -185,7 +185,7 @@ export function SearchBar() {
             value={search}
             onValueChange={handeCommands}
           />
-          <CommandList>
+          <CommandList className="max-h-[60dvh] touch-pan-y overscroll-y-contain">
             <CommandEmpty>No results found.</CommandEmpty>
             {navItems.map((currGroup, i) => (
               <div key={currGroup.group}>

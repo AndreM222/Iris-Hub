@@ -48,8 +48,10 @@ function TemplateCard({
   imgErrors: Record<string, boolean>;
   onImgError: (key: string) => void;
 }) {
+  const pathname = usePathname();
+
   return (
-    <Link href={`/marketplace/${item.slug}`} className="group block">
+    <Link href={`${pathname}/${item.slug}`} className="group block">
       <Card className="overflow-hidden transition duration-200 group-hover:-translate-y-0.5 group-hover:shadow-lg">
         {/* images */}
         <div className="relative overflow-hidden border-b bg-muted/20">

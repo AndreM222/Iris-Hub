@@ -8,7 +8,11 @@ import { Project } from '@/components/cards/project-cards';
 import { getProjects } from '@/lib/mockApi';
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  const { project, session } = useParams<{ project: string; session: string }>();
+  const { workspace, project, session } = useParams<{
+    workspace: string;
+    project: string;
+    session: string;
+  }>();
 
   const projects: Project[] = getProjects();
   const currProject: Project | undefined = projects.find((item) => item.id === project);
@@ -19,10 +23,10 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
   const navTabs: NavItem[] | undefined = session
     ? undefined
     : [
-        { title: 'Processed images', url: `/${project}`, isActive: true },
-        { title: 'Project settings', url: `/${project}/settings`, isActive: true },
-        { title: 'Project analytics', url: `/${project}/analytics`, isActive: true },
-        { title: 'Secret keys', url: `/${project}/secrets`, isActive: true },
+        { title: 'Processed images', url: `/${workspace}/${project}`, isActive: true },
+        { title: 'Project settings', url: `/${workspace}/${project}/settings`, isActive: true },
+        { title: 'Project analytics', url: `/${workspace}/${project}/analytics`, isActive: true },
+        { title: 'Secret keys', url: `/${workspace}/${project}/secrets`, isActive: true },
       ];
 
   return (

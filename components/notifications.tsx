@@ -16,7 +16,9 @@ import {
 import { cn } from '@/lib/utils';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { ShortcutView } from '@/components/shortcuts';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 
 type notification = {
   id: number;
@@ -108,6 +110,7 @@ type Notification = (typeof data)[number];
 type Tab = 'Inbox' | 'Archive';
 
 export default function Notifications() {
+  const pathname = usePathname();
   const [tab, setTab] = useState<Tab>('Inbox');
   const [enableRequest, setEnableRequest] = useState(true);
   const [open, setOpen] = useState(false);
@@ -196,7 +199,7 @@ export default function Notifications() {
               className="p-2 text-white/50 hover:bg-white/5 hover:text-white"
               asChild
             >
-              <Link href="/settings/notifications">
+              <Link href={withWorkspacePath(pathname, '/settings/notifications')}>
                 <Settings className="size-4" />
               </Link>
             </Button>

@@ -1,7 +1,7 @@
 'use client';
 
 import { Suspense, useEffect, useState } from 'react';
-import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useParams, usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { toast } from 'sonner';
 import {
   Card,
@@ -29,12 +29,13 @@ import {
   AlertDialogTitle,
 } from '@/components/ui/alert-dialog';
 
-const initialWorkspace: Workspace = getWorkspace()[0];
-
 function GeneralSettingsPageContent() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const { workspace: workspaceSlug } = useParams<{ workspace: string }>();
+  const initialWorkspace: Workspace =
+    getWorkspace().find((item) => item.slug === workspaceSlug) ?? getWorkspace()[0];
 
   const [workspace, setWorkspace] = useState<Workspace>(initialWorkspace);
   const [preview, setPreview] = useState<string | null>(null);

@@ -10,6 +10,7 @@ import {
   BreadcrumbSeparator,
 } from '@/components/ui/breadcrumb';
 import Link from 'next/link';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 
 function paths({ pathName }: { pathName: string }): [string, string][] {
   const tabs = pathName
@@ -41,7 +42,7 @@ export default function DynamicCrumbs() {
       <BreadcrumbList>
         <BreadcrumbItem className="hidden md:block">
           {tabs.length > 0 ? (
-            <BreadcrumbLink href="/">Projects</BreadcrumbLink>
+            <BreadcrumbLink href={withWorkspacePath(pathName, '/')}>Projects</BreadcrumbLink>
           ) : (
             <BreadcrumbPage>Projects</BreadcrumbPage>
           )}

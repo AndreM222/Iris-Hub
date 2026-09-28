@@ -15,11 +15,12 @@ import {
 } from '@/components/ui/command';
 import { InputGroup, InputGroupAddon } from '@/components/ui/input-group';
 import { getNavigationItems, NavItem } from '@/components/app-navigation';
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { getProjects } from '@/lib/mockApi';
 import { Project, ProjectIcon } from '@/components/cards/project-cards';
 import { Box, ChevronRight, SearchIcon } from 'lucide-react';
 import { ShortcutView } from '@/components/shortcuts';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 
 const SEARCHBAR_KEYBOARD_SHORTCUT = 'k';
 const CLEAN_COMMAND_SHORTCUT = 'Backspace';
@@ -89,6 +90,7 @@ function getSearchItems(
 }
 
 export function SearchBar() {
+  const pathname = usePathname();
   const [open, setOpen] = React.useState(false);
   const [command, setCommand] = React.useState('');
   const [search, setSearch] = React.useState('');
@@ -192,7 +194,7 @@ export function SearchBar() {
                     <CommandItem
                       key={currItem.title}
                       onSelect={() => {
-                        router.push(currItem.url);
+                        router.push(withWorkspacePath(pathname, currItem.url));
                         setOpen(false);
                       }}
                       className="gap-2"

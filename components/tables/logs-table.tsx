@@ -2,7 +2,7 @@
 
 import { logColumns, type Log } from '@/components/tables/logs-columns';
 import { DataTable } from '@/components/data-table';
-import { getStatusTone } from '@/app/logs/page';
+import { getStatusTone } from '@/lib/log-format';
 
 export function LogsTable({
   data,

@@ -2,7 +2,7 @@
 
 import { ColumnDef } from '@tanstack/react-table';
 import { Badge } from '../ui/badge';
-import { methodVariant } from '@/app/logs/page';
+import { methodVariant } from '@/lib/log-format';
 
 export type LogError = {
   code?: string;

@@ -15,6 +15,7 @@ import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { IconName } from '@/components/dialogs/project-icon';
 import { ProjectIcon } from '@/components/cards/project-cards';
 import { ProjectBanner } from '@/components/project-switcher';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 
 export type NavItem = {
   title: string;
@@ -181,9 +182,11 @@ export const navList: {
 function useCurrentPage() {
   const pathname = usePathname();
 
+  const matches = (url: string) => withWorkspacePath(pathname, url) === pathname;
+
   for (const group of navList) {
     for (const tab of group.tabs) {
-      if (tab.url === pathname) {
+      if (matches(tab.url)) {
         return {
           title: tab.title,
           description: tab.description,
@@ -193,7 +196,7 @@ function useCurrentPage() {
         };
       }
 
-      if (tab.subItems?.some((sub) => sub.url === pathname)) {
+      if (tab.subItems?.some((sub) => matches(sub.url))) {
         return {
           title: tab.title,
           description: tab.description,
@@ -204,7 +207,7 @@ function useCurrentPage() {
       }
 
       for (const item of tab.items ?? []) {
-        if (item.url === pathname) {
+        if (matches(item.url)) {
           return {
             title: item.title,
             description: item.description,
@@ -214,7 +217,7 @@ function useCurrentPage() {
           };
         }
 
-        if (item.subItems?.some((sub) => sub.url === pathname)) {
+        if (item.subItems?.some((sub) => matches(sub.url))) {
           return {
             title: item.title,
             description: item.description,
@@ -316,7 +319,9 @@ export const PageHeader = ({
     return <div className="-m-3" />;
   }
 
-  const activeTab = subItems?.find((tab) => tab.url === pathname)?.title ?? subItems?.[0]?.title;
+  const activeTab =
+    subItems?.find((tab) => withWorkspacePath(pathname, tab.url) === pathname)?.title ??
+    subItems?.[0]?.title;
 
   const paths = pathname.split('/').filter(Boolean);
 
@@ -359,7 +364,7 @@ export const PageHeader = ({
             const tab = subItems.find((item) => item.title === value);
 
             if (tab) {
-              router.push(tab.url);
+              router.push(withWorkspacePath(pathname, tab.url));
             }
           }}
         >
@@ -429,6 +434,7 @@ export function getNavigationItems(): {
 
 export default function SubNavigator() {
   const items = PageItems();
+  const pathname = usePathname();
 
   return (
     <nav className="flex flex-col gap-2">
@@ -438,7 +444,7 @@ export default function SubNavigator() {
         return (
           <Link
             key={item.url}
-            href={item.url}
+            href={withWorkspacePath(pathname, item.url)}
             className={cn(
               buttonVariants({ variant: 'outline' }),
               'h-auto w-full justify-between rounded-xl border p-2 text-left transition-colors',

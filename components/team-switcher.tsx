@@ -20,10 +20,16 @@ import {
 } from '@/components/ui/sidebar';
 import { AccountPicture } from '@/components/account-banner';
 import { Workspace } from '@/lib/mockApi';
+import { replaceWorkspacePath } from '@/lib/workspace-routing';
+import { usePathname, useRouter } from 'next/navigation';
 
 export function WorkspaceSwitcher({ workspaces: workspaces }: { workspaces: Workspace[] }) {
   const { isMobile } = useSidebar();
-  const [activeWorkspace, setActiveWorkspace] = React.useState(workspaces[0]);
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentWorkspace = pathname.split('/').filter(Boolean)[0];
+  const activeWorkspace =
+    workspaces.find((workspace) => workspace.slug === currentWorkspace) ?? workspaces[0];
 
   if (!activeWorkspace) {
     return null;
@@ -57,8 +63,8 @@ export function WorkspaceSwitcher({ workspaces: workspaces }: { workspaces: Work
             </DropdownMenuLabel>
             {workspaces.map((team, index) => (
               <DropdownMenuItem
-                key={team.name}
-                onClick={() => setActiveWorkspace(team)}
+                key={team.id}
+                onClick={() => router.push(replaceWorkspacePath(pathname, team.slug))}
                 className="gap-2 p-2"
               >
                 <AccountPicture name={team.name} avatar={team.logo} size="sm" />

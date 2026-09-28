@@ -333,7 +333,7 @@ function ProjectSettingsPageContent() {
               setUsers((prev) => prev.filter((u) => u.id !== id));
               toast.success('User removed.');
             }}
-            onOpen={() => router.push('/')}
+            onOpen={() => router.push(pathname.split('/').slice(0, 2).join('/') || '/')}
           />
         </CardContent>
       </Card>
@@ -374,7 +374,7 @@ function ProjectSettingsPageContent() {
               setRoles((prev) => prev.filter((u) => u.id !== id));
               toast.success('Role removed.');
             }}
-            onOpen={() => router.push('/')}
+            onOpen={() => router.push(pathname.split('/').slice(0, 2).join('/') || '/')}
           />
         </CardContent>
       </Card>
@@ -463,7 +463,7 @@ function ProjectSettingsPageContent() {
               setLayouts((prev) => prev.filter((l) => l.id !== id));
               toast.success('Layout removed.');
             }}
-            onOpen={() => router.push('/')}
+            onOpen={() => router.push(pathname.split('/').slice(0, 2).join('/') || '/')}
           />
         </CardContent>
       </Card>
@@ -507,7 +507,7 @@ function ProjectSettingsPageContent() {
               setServers((prev) => prev.filter((s) => s.id !== id));
               toast.success('Server removed.');
             }}
-            onOpen={() => router.push('/')}
+            onOpen={() => router.push(pathname.split('/').slice(0, 2).join('/') || '/')}
           />
         </CardContent>
       </Card>
@@ -553,7 +553,7 @@ function ProjectSettingsPageContent() {
               setProjectLinks((prev) => prev.filter((p) => p.id !== id));
               toast.success('Project unlinked.');
             }}
-            onOpen={(id) => router.replace(`/${id}`)}
+            onOpen={(id) => router.replace(`${pathname.split('/').slice(0, 2).join('/')}/${id}`)}
           />
         </CardContent>
       </Card>

@@ -19,7 +19,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { AccountBanner } from '@/components/account-banner';
-import { Role } from '@/app/settings/members/roles/page';
+import { Role } from '@/components/tables/roles-columns';
 import { User } from '@/components/tables/users-columns';
 
 export function ChangeRoleDialog({

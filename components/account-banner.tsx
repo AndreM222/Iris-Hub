@@ -20,6 +20,8 @@ import { LogOut, MessageSquareWarning, UserCircle, Wallet } from 'lucide-react';
 import { FaGear } from 'react-icons/fa6';
 import { cn } from '@/lib/utils';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 import { useState } from 'react';
 import { FeedbackDialog } from './dialogs/feedback-dialog';
 
@@ -99,6 +101,7 @@ export function NavUser({
 }) {
   const [feedbackOpen, setFeedbackOpen] = useState(false);
   const { isMobile } = useSidebar();
+  const pathname = usePathname();
 
   return (
     <div>
@@ -125,19 +128,19 @@ export function NavUser({
               <DropdownMenuSeparator />
               <DropdownMenuGroup>
                 <DropdownMenuItem asChild>
-                  <Link href="/settings/account">
+                  <Link href={withWorkspacePath(pathname, '/settings/account')}>
                     <UserCircle />
                     Account
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/settings">
+                  <Link href={withWorkspacePath(pathname, '/settings')}>
                     <FaGear />
                     Settings
                   </Link>
                 </DropdownMenuItem>
                 <DropdownMenuItem asChild>
-                  <Link href="/billing">
+                  <Link href={withWorkspacePath(pathname, '/billing')}>
                     <Wallet />
                     Billing
                   </Link>

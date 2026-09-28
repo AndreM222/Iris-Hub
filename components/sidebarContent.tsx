@@ -18,6 +18,8 @@ import {
 import { NavItem } from '@/components/app-navigation';
 import { IconName } from '@/components/dialogs/project-icon';
 import { ComponentType } from 'react';
+import { usePathname } from 'next/navigation';
+import { withWorkspacePath } from '@/lib/workspace-routing';
 
 export const NameToIcon = ({ name, ...props }: { name?: IconName } & LucideIcons.LucideProps) => {
   const Icon = (LucideIcons as unknown as Record<string, ComponentType<LucideIcons.LucideProps>>)[
@@ -28,13 +30,15 @@ export const NameToIcon = ({ name, ...props }: { name?: IconName } & LucideIcons
 };
 
 function Groups({ items }: { items: NavItem[] }) {
+  const pathname = usePathname();
+
   return (
     <SidebarMenu>
       {items.map((item) => (
         <Collapsible key={item.title} asChild defaultOpen={item.isActive}>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip={item.title}>
-              <a href={item.url}>
+              <a href={withWorkspacePath(pathname, item.url)}>
                 <NameToIcon name={item.icon} />
                 <span>{item.title}</span>
               </a>
@@ -52,7 +56,7 @@ function Groups({ items }: { items: NavItem[] }) {
                     {item.items?.map((subItem) => (
                       <SidebarMenuSubItem key={subItem.title}>
                         <SidebarMenuSubButton asChild>
-                          <a href={subItem.url}>
+                          <a href={withWorkspacePath(pathname, subItem.url)}>
                             <NameToIcon name={subItem.icon} />
                             <span>{subItem.title}</span>
                           </a>

@@ -150,7 +150,9 @@ function AnalyticsPageContent() {
           <CardContent className="space-y-2">
             <CorrectionsTable
               data={correctionsData}
-              onOpen={(id) => router.push(`/settings/tags/${id ?? ''}`)}
+              onOpen={(id) =>
+                router.push(`${pathname.split('/analytics')[0]}/settings/tags/${id ?? ''}`)
+              }
               pageSize={6}
             />
           </CardContent>

@@ -4,7 +4,7 @@ import { LayoutTableData } from '@/components/tables/layouts-columns';
 import { DetectionSession } from '@/components/tables/detection-columns';
 import { Log } from '@/components/tables/logs-columns';
 import { Project } from '@/components/cards/project-cards';
-import { TagGroupDetail } from '@/app/settings/tags/[tagGroup]/page';
+import { TagGroupDetail } from '@/lib/tag-types';
 import { TagGroup } from '@/components/tables/tags-columns';
 import { ServerActivity } from '@/components/tables/global-columns';
 import { SingleSetting } from '@/components/tables/settings-columns';
@@ -107,6 +107,8 @@ export type DetectionLayer = {
 };
 
 export type Workspace = {
+  id: string;
+  slug: string;
   name: string;
   logo: string;
   plan: string;
@@ -1324,16 +1326,22 @@ export const getAccountUser = () => ({
 
 export const getWorkspace = (): Workspace[] => [
   {
+    id: 'workspace-acme-inc',
+    slug: 'acme-inc',
     name: 'Acme Inc',
     logo: '',
     plan: 'Enterprise',
   },
   {
+    id: 'workspace-acme-corp',
+    slug: 'acme-corp',
     name: 'Acme Corp.',
     logo: '',
     plan: 'Startup',
   },
   {
+    id: 'workspace-evil-corp',
+    slug: 'evil-corp',
     name: 'Evil Corp.',
     logo: '',
     plan: 'Free',

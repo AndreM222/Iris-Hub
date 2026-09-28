@@ -48,8 +48,16 @@ export function GlobalDataLayoutContent({ children }: { children: React.ReactNod
   }, [projects, selectedProject]);
 
   const navTabs: NavItem[] | undefined = [
-    { title: 'Global Activity', url: `/global-data/${selectedProject.id}`, isActive: true },
-    { title: 'Server Activity', url: `/global-data/${selectedProject.id}/servers`, isActive: true },
+    {
+      title: 'Global Activity',
+      url: `${parentPath}/${selectedProject.id}`,
+      isActive: true,
+    },
+    {
+      title: 'Server Activity',
+      url: `${parentPath}/${selectedProject.id}/servers`,
+      isActive: true,
+    },
   ];
 
   return (

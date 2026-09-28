@@ -34,7 +34,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { cn } from '@/lib/utils';
-import { useParams } from 'next/navigation';
+import { useParams, usePathname } from 'next/navigation';
 import {} from '@/components/app-navigation';
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 
@@ -64,6 +64,7 @@ const FILTERS: FilterValue[] = ['All', 'Pallet', 'Forklift', 'Person'];
 
 export default function Session() {
   const { session } = useParams<{ project: string; session: string }>();
+  const pathname = usePathname();
   const initialImages = session ? getSessionImages(session) : [];
   const [images, setImages] = useState<SessionImage[]>(initialImages);
   const [activeImageId, setActiveImageId] = useState(initialImages[0]?.id ?? '');
@@ -539,13 +540,13 @@ export default function Session() {
 
           <CardFooter className="flex items-center justify-between border-t bg-muted/20 px-6 py-4">
             <Button variant="outline" asChild>
-              <Link href="/projects">
+              <Link href={pathname.split('/').slice(0, 2).join('/') || '/'}>
                 <ChevronLeft className="h-4 w-4" />
               </Link>
             </Button>
 
             <Button variant="outline" asChild>
-              <Link href="/projects">
+              <Link href={pathname.split('/').slice(0, 2).join('/') || '/'}>
                 <ChevronRight className="h-4 w-4" />
               </Link>
             </Button>

@@ -2,7 +2,7 @@
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 import { Suspense, useEffect, useState } from 'react';
-import { Plus, Tag } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Field } from '@/components/ui/field';
 import TagDialog from '@/components/dialogs/tag-dialog';
@@ -11,6 +11,7 @@ import { Label } from '@/components/ui/label';
 import { CreateTagItemTable } from '@/components/tables/tags-table';
 import { PageHeader } from '@/components/app-navigation';
 import { getTags } from '@/lib/mockApi';
+import { type Tag, TagGroupDetail } from '@/lib/tag-types';
 import {
   Card,
   CardContent,
@@ -19,20 +20,6 @@ import {
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
-
-export type Tag = {
-  id: string;
-  name: string;
-  description: string;
-  color: string;
-};
-
-export type TagGroupDetail = {
-  id: string;
-  name: string;
-  description: string;
-  tags: Tag[];
-};
 
 function TagGroupPageContent() {
   const pathname = usePathname();

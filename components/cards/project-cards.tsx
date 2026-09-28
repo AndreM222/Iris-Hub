@@ -94,7 +94,7 @@ const ProjectCard = ({ item }: { item: Project }) => {
   const pathname: string = usePathname();
 
   return (
-    <Link href={`${pathname}${item.id}`} className="group block">
+    <Link href={`${pathname}/${item.id}`} className="group block">
       <Card className="h-full overflow-hidden transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md">
         <CardHeader className="space-y-3">
           <div className="flex items-start justify-between gap-3">

@@ -368,9 +368,16 @@ export const PageHeader = ({
             }
           }}
         >
-          <TabsList>
+          <TabsList className="grid w-full grid-cols-2 h-auto group-data-horizontal/tabs:h-auto sm:inline-flex sm:w-fit sm:grid-cols-none">
             {subItems.map((tab) => (
-              <TabsTrigger key={tab.title} value={tab.title} className={styles.tabs}>
+              <TabsTrigger
+                key={tab.title}
+                value={tab.title}
+                className={cn(
+                  styles.tabs,
+                  'h-auto min-h-7 whitespace-normal py-1 text-center leading-tight sm:whitespace-nowrap'
+                )}
+              >
                 {tab.title}
               </TabsTrigger>
             ))}

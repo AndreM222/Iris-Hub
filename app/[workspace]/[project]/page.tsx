@@ -55,7 +55,7 @@ function ProjectPageContent() {
         </CardHeader>
 
         <CardContent className="space-y-6">
-          <div className="flex space-x-2">
+          <div className="grid grid-cols-1 gap-2 lg:grid-cols-[11.25rem_minmax(0,1fr)_auto]">
             <Select value={status} onValueChange={setStatus}>
               <SelectTrigger className="w-45">
                 <SelectValue />
